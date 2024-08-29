@@ -1,0 +1,148 @@
+/* Footer styling */
+footer {
+    padding: 20px;
+    background-color: #042745; /* Dark blue background color */
+    color: white; /* Text color white */
+}
+
+/* Flexbox layout for footer sections */
+.footer-flex {
+    display: flex;
+    justify-content: space-around; /* Space between the sections */
+}
+
+/* General footer div styling */
+footer div {
+    flex: 1; /* Flex-grow for equal space distribution */
+    margin: 0 10px; /* Horizontal margin */
+}
+
+/* Inner container margin for spacing within the footer */
+.footer-inner-container {
+    margin: 30px 0 0 20px; /* Margin from the top and left */
+}
+
+/* General margin for heading, anchor tags, and form elements in the footer */
+footer h2, footer h3, footer a, footer form {
+    margin: 20px 0; /* Vertical margin */
+}
+
+/* Footer anchor tag styling */
+footer div a {
+    text-decoration: none; /* Removes underline */
+    color: white; /* White text color */
+}
+
+/* Footer h3 styling */
+footer h3 {
+    font-weight: normal; /* Normal font weight */
+    font-size: 15px; /* Small font size */
+}
+
+/* Footer form display styling */
+footer form {
+    display: flex; /* Horizontal layout for form elements */
+}
+
+/* Margin for form divs */
+footer form div {
+    margin-bottom: 10px; /* Bottom margin */
+}
+
+/* Input field styling */
+footer form input {
+    background: none; /* Transparent background */
+    color: white; /* White text color */
+    opacity: 1; /* Full opacity for input text */
+    border: 1px solid white; /* White border */
+    height: 30px; /* Fixed input height */
+    width: 200px; /* Fixed input width */
+    padding: 2px 2px 2px 4px; /* Padding inside the input */
+    border-radius: 0; /* No border radius */
+    outline: none; /* Removes default outline */
+    box-shadow: none; /* Removes default shadow */
+}
+
+/* Placeholder text styling */
+footer form input::placeholder {
+    color: white; /* White placeholder text */
+    opacity: 80%; /* Slight transparency for placeholder text */
+    font-size: 15px;
+}
+
+/* Button styling in the form */
+footer form button {
+    height: 36px; /* Fixed button height */
+    width: 50px; /* Fixed button width */
+    border-radius: 0; /* No border radius */
+    background-color: black; /* Black background */
+    border: none; /* No border */
+    color: white; /* White text color */
+    font-weight: bold; /* Bold text */
+    box-shadow: none; /* Removes default shadow */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for the subscribe button */
+footer form button:hover {
+    background-color: #212121; /* Blue background on hover */
+    transform: scale(1.05); /* Slight scale-up effect */
+}
+
+
+/* Footer bottom section styling */
+.footer-bottom {
+    display: flex; /* Flexbox layout */
+    width: 100%; /* Full width */
+    padding-bottom: 30px; /* Padding at the bottom */
+    align-items: flex-end; /* Align items to the bottom */
+}
+
+/* Footer bottom div flex distribution */
+.footer-bottom div {
+    flex: 1; /* Equal flex distribution */
+}
+
+/* Larger flex-basis for the first child */
+.footer-bottom div:first-child {
+    flex-basis: 65%; /* Takes up more space */
+}
+
+/* Smaller flex-basis for the last child */
+.footer-bottom div:last-child {
+    flex-basis: 35%; /* Takes up less space */
+}
+
+/* Container for copyright text */
+.copyright-container-div {
+    display: flex; /* Flexbox layout */
+    justify-content: center; /* Centers the content horizontally */
+    align-items: flex-end; /* Aligns content to the bottom */
+    height: 100%; /* Full height */
+}
+
+/* Social media container styling */
+.social-connect-div {
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Vertical layout */
+    justify-content: center; /* Centers content vertically */
+    align-items: center; /* Aligns content horizontally */
+}
+
+/* Social media inner container styling */
+.social-connect-inner-div {
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Vertical layout */
+    justify-content: center; /* Centers icons horizontally */
+    align-items: center; /* Aligns icons in the center */
+    gap: 10px; /* Space between icons */
+}
+
+/* Mid container for social media icons */
+.social-icon-container-mid-div {
+    display: flex; /* Flexbox layout for icons */
+}
+
+.social-icon-container-inner-div:hover {
+    transform: scale(1.2);
+}

@@ -1,0 +1,152 @@
+/* Reset default margin and padding for main element */
+main {
+    margin: 0;
+    padding: 0;
+}
+
+/* Black background section reset */
+section.black-background-section {
+    margin: 0;
+    padding: 0;
+}
+
+/* Reset margin and padding for all h2 elements */
+h2 {
+    margin: 0;
+    padding: 0;
+}
+
+/* Reset margin and padding for form elements */
+form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Black background section styling */
+.black-background-section {
+    background-color: black; /* Black background color */
+    padding: 50px 0; /* Vertical padding */
+}
+
+/* Heading styling inside the black background section */
+.black-background-section h2 {
+    color: white; /* White text color */
+    text-align: center; /* Center-align the text */
+    padding: 50px; /* Padding around the heading */
+    font-size: 40px; /* Large font size */
+}
+
+/* Form container styling */
+.form-container-div {
+    display: flex; /* Flexbox layout */
+    justify-content: center; /* Center the form horizontally */
+    align-items: center; /* Center the form vertically */
+}
+
+/* Form styling */
+.search-form {
+    display: flex; /* Flexbox layout for the form content */
+    justify-content: center; /* Center the content inside the form */
+    align-items: center; /* Center the content vertically */
+    padding-bottom: 100px; /* Adds space below the form */
+}
+
+/* Text input styling inside the form */
+.search-form input[type="text"] {
+    width: 700px; /* Fixed width for the input field */
+    padding: 10px; /* Padding inside the input field */
+    height: 30px; /* Fixed height for the input field */
+    border: none; /* Removes default border */
+    outline: none; /* Removes default outline */
+    font-size: 20px; /* Set the font size to 20px for the selected element */
+}
+
+/* Button styling inside the form */
+.search-form button {
+    width: 100px; /* Fixed width for the button */
+    height: 50px; /* Fixed height for the button */
+    padding: 10px 20px; /* Padding inside the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    border: none; /* Removes default border */
+    background-color: #1490EA; /* Blue background color for the button */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for the button */
+.search-form button:hover {
+    background-color: #0e6dbd; /* Darker blue on hover */
+    transform: scale(1.02); /* Slight scale effect on hover */
+}
+
+
+/* Welcome section container styling */
+.welcome-container-div {
+    display: flex; /* Flexbox layout */
+    margin: 50px; /* Margin around the welcome section */
+}
+
+/* Portrait image styling */
+.potrait-image {
+    height: 600px; /* Fixed height for the portrait image */
+    width: auto; /* Auto width to maintain aspect ratio */
+}
+
+/* Welcome message container styling */
+.welcome-message-div {
+    width: 60%; /* 60% width for the welcome message */
+    margin-right: 50px; /* Right margin for spacing */
+}
+
+/* Welcome message block styling */
+.welcome-message-chunk-div {
+    margin: 50px 50px 100px 50px; /* Margin around the message blocks */
+    line-height: 30px; /* Line height for better readability */
+}
+
+/* Welcome message title styling */
+.welcome-message-title-div h2 {
+    font-size: 40px; /* Large font size for the title */
+}
+
+/* Paragraph styling inside the welcome message */
+.welcome-message-paragraph-div p {
+    margin-top: 40px; /* Space above the paragraph */
+}
+
+/* Gray background section styling */
+.gray-background-section {
+    background-color: #cfd8de; /* Light gray background color */
+    margin: 0; /* No margin */
+    padding: 30px 0; /* Vertical padding */
+}
+
+/* Landscape image styling */
+.landscape-image {
+    width: 500px; /* Fixed width for the landscape image */
+    height: auto; /* Auto height to maintain aspect ratio */
+    margin-right: 50px; /* Right margin for spacing */
+}
+
+/* Add margin class */
+.add-margin {
+    margin: 100px; /* Adds 100px margin */
+}
+
+/* Right detail container styling */
+.right-detail-container {
+    margin: 20px 30px; /* Margin around the right detail container */
+}
+
+/* Heading styling inside the right detail container */
+.right-detail-container h2 {
+    font-size: 30px; /* Medium font size */
+}
+
+/* Paragraph styling inside the right detail container */
+.right-detail-container p {
+    line-height: 30px; /* Line height for readability */
+}
+
+form input::placeholder {
+    font-size: 20px;
+}

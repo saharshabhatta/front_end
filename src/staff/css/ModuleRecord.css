@@ -1,0 +1,36 @@
+.boxes-container {  
+    display: grid;  
+    grid-template-columns: 1fr 1fr; /* Two columns */  
+    gap: 16px; /* Space between boxes */  
+    margin-top: 20px; /* Space above the boxes */  
+    margin-left: 20px;  
+    align-items: start; /* Align items at the start of the grid cell */  
+}  
+
+.boxes {  
+    text-align: left;
+    min-height: 200px; /* Set a minimum height */  
+    padding: 20px; /* Padding for box content */  
+    margin: 0; /* No margins on the box */  
+    background-color: #e0e0e0; /* Background color */  
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for box */  
+    border-radius: 4px; /* Rounded corners */  
+    overflow: hidden; /* Hide overflow if needed */  
+    display: flex; /* Use Flexbox for alignment */  
+    flex-direction: column; /* Align items in a column */  
+    justify-content: left; /* Center content vertically */  
+    transition: transform 0.2s, background-color 0.2s; /* Transition for hover effect */  
+}  
+
+.heading-line {  
+    margin: 10px 0; /* Space above and below the line */  
+    border: none; /* Remove default border */  
+    height: 2px; /* Height of the line */  
+    background-color: #333; /* Line color */  
+    border-radius: 1px; /* Optional: rounded edges */  
+}
+
+.box:hover {  
+    background-color: #d3d3d3; /* Darker grey on hover */  
+    transform: scale(1.02); /* Slightly enlarge the box */  
+}

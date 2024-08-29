@@ -1,0 +1,79 @@
+/* Full-screen popup overlay */
+/* This class creates a full-screen overlay with a semi-transparent black background. 
+   It covers the entire viewport and centers the popup content using Flexbox. */
+   .popup-overlay {
+    position: fixed; /* Fixes the overlay to the viewport */
+    top: 0; /* Positions the overlay at the top of the viewport */
+    left: 0; /* Positions the overlay at the left of the viewport */
+    width: 100%; /* Ensures the overlay covers the entire width of the viewport */
+    height: 100%; /* Ensures the overlay covers the entire height of the viewport */
+    background-color: rgba(0, 0, 0, 0.8); /* Black background with 80% opacity */
+    display: flex; /* Enables Flexbox layout for centering */
+    justify-content: center; /* Centers the popup content horizontally */
+    align-items: center; /* Centers the popup content vertically */
+    z-index: 1000; /* Ensures the overlay appears above all other content */
+}
+
+/* Popup content styling */
+/* This class styles the content inside the popup, including the text and button. */
+.popup-content {
+    text-align: center; /* Centers the text inside the popup */
+    background-color: #fff; /* White background for the popup content */
+    padding: 30px; /* Adds padding inside the popup content */
+    border-radius: 10px; /* Rounds the corners of the popup content */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Adds a subtle shadow for depth */
+}
+
+/* Heading styling */
+/* This class styles the heading inside the popup content. */
+.popup-content h1 {
+    margin-bottom: 20px; /* Adds space below the heading */
+    font-size: 2em; /* Increases the font size of the heading */
+    color: #333; /* Dark gray color for the heading text */
+}
+
+/* Paragraph styling */
+/* This class styles the paragraph inside the popup content. */
+.popup-content p {
+    margin-bottom: 20px; /* Adds space below the paragraph */
+    font-size: 1.2em; /* Slightly larger font size for readability */
+    color: #555; /* Medium gray color for the paragraph text */
+}
+
+/* Link button styling */
+/* This class styles the "Go Back" link to look like a button. */
+.popup-content a {
+    display: inline-block; /* Makes the link behave like a block-level element */
+    margin-top: 20px; /* Adds space above the link */
+    padding: 10px 20px; /* Adds padding inside the link for a button-like appearance */
+    background-color: #007BFF; /* Blue background color for the link button */
+    color: #fff; /* White text color for the link */
+    text-decoration: none; /* Removes the underline from the link */
+    border-radius: 5px; /* Rounds the corners of the link button */
+    transition: background-color 0.3s ease; /* Adds a smooth transition effect for background color changes */
+}
+
+/* Link button hover effect */
+/* This class defines the hover effect for the link button. */
+.popup-content a:hover {
+    background-color: #0056b3; /* Darkens the background color when the link is hovered */
+}
+
+/* Add this to your existing CSS */
+
+.popup-content button {
+  display: inline-block; /* Makes the button behave like an inline block element */
+  margin-top: 20px; /* Adds space above the button */
+  padding: 10px 20px; /* Adds padding inside the button for better spacing */
+  background-color: #007BFF; /* Sets the background color of the button */
+  color: #fff; /* Sets the text color to white */
+  border: none; /* Removes the default border of the button */
+  border-radius: 5px; /* Rounds the corners of the button */
+  cursor: pointer; /* Changes the cursor to a pointer when hovering over the button */
+  transition: background-color 0.3s ease; /* Adds a smooth transition effect for the background color when hovered */
+}
+
+.popup-content button:hover {
+  background-color: #0056b3; /* Changes the background color when the button is hovered */
+}
+

@@ -1,0 +1,28 @@
+.news-blogs {
+    text-align: center;
+    padding: 20px;
+    background-color: #E4E4E4;
+  }
+  
+  .blog-items {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .blog-item {
+    width: 30%;
+  }
+  
+  .blog-item img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .blog-item h3 {
+    margin-top: 10px;
+  }
+  
+  .blog-item p {
+    margin: 5px 0;
+  }
+  

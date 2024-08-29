@@ -1,0 +1,63 @@
+.black-section {
+    height: 50px;
+    background-color: black;
+}
+
+/* General section styling */
+.section-course, .section-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    background-color: #f7f7f7;
+}
+
+.section-course a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Title styling */
+.section-title {
+    font-size: 30px;
+}
+
+/* Grid container for courses */
+.course-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Adjust grid columns */
+    gap: 20px; /* Space between grid items */
+}
+
+/* Individual course container */
+.course-container {
+    display: flex;
+    flex-direction: column; /* Arrange image and heading vertically */
+    align-items: center;
+    text-align: center;
+    width: 300px; /* Ensure container matches image width */
+    margin: 30px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for smooth effect */
+}
+
+.course-container:hover {
+    transform: scale(1.05); /* Slightly enlarge the container */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Intensify the shadow on hover */
+}
+
+/* Styling for course images */
+.course-image {
+    width: 300px; /* Fixed width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px;
+}
+
+/* Styling for course headings */
+.course-name-container h2 {
+    padding: 30px 20px; /* Add padding to the heading */
+    margin: 0; /* Remove default margin */
+    font-size: 20px;
+}

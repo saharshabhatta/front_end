@@ -1,0 +1,125 @@
+/* Reset body and main element margin */
+body, main {
+  margin: 0;
+  padding: 0; /* Remove default padding and margin */
+}
+
+/* Header styles */
+header {
+  background-color: #333; /* Fallback background color in case the image fails to load */
+  background-image: url('../images/Header-image.png'); /* Header background image */
+  background-size: cover; /* Ensures the image covers the entire header */
+  background-position: center; /* Centers the background image */
+  color: white; /* Text color for the header */
+  padding: 0px; /* Remove extra padding from the header */
+  width: 100%; /* Full width header */
+  height: 550px; /* Fixed height for the header */
+  top: 0; /* Aligns the header to the top */
+  left: 0; /* Aligns the header to the left */
+  z-index: 999; /* High z-index to ensure the header stays on top */
+  display: flex; /* Flexbox layout for header content */
+  position: relative; /* Allows header to scroll with the page */
+}
+
+/* Logo container styling */
+.logo-container {
+  background-image: url('../images/image0.png'); /* Logo image */
+  background-size: contain; /* Scales the logo image to fit the container */
+  background-repeat: no-repeat; /* Prevents logo from repeating */
+  background-position: center; /* Centers the logo within the container */
+  height: 70px; /* Fixed height for the logo container */
+  width: 70px; /* Fixed width for the logo container */
+  cursor: pointer; /* Changes the cursor to pointer when hovering over the logo */
+  position: fixed; /* Fixes the logo position on the page */
+  top: 10px; /* Aligns the logo 10px from the top */
+  left: 30px; /* Aligns the logo 30px from the left */
+  z-index: 1000; /* Ensures the logo stays above the header image */
+}
+
+/* Navigation container styling */
+.nav-container-div {
+  margin-left: auto; /* Auto margin to center content */
+  margin-right: auto; /* Auto margin to center content */
+  position: fixed; /* Fixes the navigation bar position */
+  top: 10px; /* Aligns the nav bar 10px from the top */
+  left: 50%; /* Centers the nav container horizontally */
+  transform: translateX(-50%); /* Moves the nav container to the exact center */
+  z-index: 1000; /* Ensures the nav container stays above the header image */
+}
+
+/* Navigation bar styling */
+.nav-container {
+  background-color: #042745; /* Dark blue background color */
+  width: 100%; /* Full width for the navigation bar */
+  height: 70px; /* Fixed height for the navigation bar */
+  border-radius: 40px; /* Rounded corners */
+  opacity: 76%; /* Slight transparency for the nav bar */
+}
+
+/* Scroll box styling */
+.scroll-box {
+  background-color: #042745; /* Same background color as the navigation bar */
+  width: 100%; /* Full width */
+  height: 80px; /* Fixed height for the scroll box */
+  position: fixed; /* Fixes the scroll box position */
+  top: 0; /* Aligns the scroll box to the top */
+  left: 0; /* Aligns the scroll box to the left */
+  z-index: 900; /* Slightly lower z-index than the navigation and logo */
+  display: none; /* Hidden initially, likely for when scroll behavior triggers it */
+}
+
+/* Line element styling */
+.line {
+  background-color: white; /* White line */
+  padding: 5px 1px; /* Padding to create a thin line */
+  margin-top: 15px; /* Margin from the top */
+  margin-bottom: 15px;
+}
+
+/* Unordered list inside the nav bar */
+header nav ul {
+  list-style-type: none; /* Removes default bullet points */
+  padding: 0; /* Removes default padding */
+  margin: 0; /* Removes default margin */
+  display: flex; /* Flexbox layout to align list items */
+  justify-content: space-around; /* Space the list items evenly */
+}
+
+/* List item styling */
+header nav ul li {
+  margin: 0; /* Remove default margin */
+  position: relative; /* Relative positioning for future child element styling */
+}
+
+/* Anchor link styling */
+header nav ul li a {
+  color: white; /* White text color */
+  text-decoration: none; /* Remove underline from links */
+  font-size: 25px; /* Larger font size for navigation links */
+  padding: 15px 30px 0px 30px; /* Padding around the text */
+  display: block; /* Display as a block element */
+  position: relative; /* Relative positioning for pseudo-element styling */
+  overflow: hidden; /* Prevents overflow of child elements */
+  text-align: center; /* Centers the text inside the link */
+}
+
+/* Pseudo-element for hover and active link underline */
+header nav ul li a::after {
+  content: ''; /* Empty content to create the underline effect */
+  position: absolute; /* Absolute positioning for precise placement */
+  left: 50%; /* Start from the middle */
+  bottom: 0; /* Aligns to the bottom of the link */
+  width: 60%; /* Underline width */
+  height: 2px; /* Thickness of the underline */
+  background-color: white; /* White underline */
+  transform: translateX(-50%) scaleX(0); /* Hidden by default, scaled down */
+  transform-origin: bottom right; /* Animation starts from the right */
+  transition: transform 0.5s ease-out; /* Smooth scaling transition */
+}
+
+/* Hover and active state for the underline effect */
+header nav ul li a:hover::after,
+header nav ul li a.active1::after {
+  transform: translateX(-50%) scaleX(1); /* Scales the underline to full width */
+  transform-origin: bottom left; /* Animation starts from the left when hovered */
+}
