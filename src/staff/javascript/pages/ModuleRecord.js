@@ -9,12 +9,11 @@ const ModuleRecord = () => {
     const [modules, setModules] = useState([]);
     const [filteredModules, setFilteredModules] = useState([]);
 
-    // Function to fetch modules from the server with an optional search query
     const fetchModules = (query = '') => {
         axios
             .get('http://localhost:8000/modules', {
                 headers: {
-                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmMxZjgyMzNiYmExNWNmMjRmMjBjZTEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNDkxODE1NCwiZXhwIjoyNzI0OTE4MTU0fQ._xijVZPZK2vgB58T6IxCyeeF881WV6OO1LGdv3o2eGA', // Replace with your valid token
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmMxZjgyMzNiYmExNWNmMjRmMjBjZTEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNTE2MDYzNiwiZXhwIjoyNzI1MTYwNjM2fQ.ccGC8dGCZZJHjsbjA6CBTzOEfFk9iujjwnCwvEhZYgk', // Replace with your valid token
                 },
                 params: {
                     search: query,
@@ -30,12 +29,10 @@ const ModuleRecord = () => {
             });
     };
 
-    // Fetch modules when the component mounts or when searchTerm changes
     useEffect(() => {
         fetchModules(searchTerm);
     }, [searchTerm]);
 
-    // Function to filter modules based on search term
     const filterModules = (query) => {
         if (!query) {
             setFilteredModules(modules);
@@ -43,12 +40,11 @@ const ModuleRecord = () => {
         }
 
         const results = modules.filter(module =>
-            module.title && module.title.toLowerCase().includes(query.toLowerCase())
+            module.name && module.name.toLowerCase().includes(query.toLowerCase())
         );
         setFilteredModules(results);
     };
 
-    // Update filtered modules whenever the search term changes
     useEffect(() => {
         filterModules(searchTerm);
     }, [searchTerm, modules]);
@@ -61,39 +57,40 @@ const ModuleRecord = () => {
         filterModules(searchTerm);
     };
 
-    // Function to add a new module
     const addModule = () => {
         const newModule = {
-            title: 'New Module Title',
+            module_code: 'NEWCODE123',
+            course_id: 'COURSE123',
+            name: 'New Module Name',
+            description: 'This is a new module.',
             lecturer: 'New Lecturer',
         };
 
         axios
             .post('http://localhost:8000/modules', newModule, {
                 headers: {
-                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmMxZjgyMzNiYmExNWNmMjRmMjBjZTEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNDkxODE1NCwiZXhwIjoyNzI0OTE4MTU0fQ._xijVZPZK2vgB58T6IxCyeeF881WV6OO1LGdv3o2eGA', // Replace with your valid token
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmMxZjgyMzNiYmExNWNmMjRmMjBjZTEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNTE2MDYzNiwiZXhwIjoyNzI1MTYwNjM2fQ.ccGC8dGCZZJHjsbjA6CBTzOEfFk9iujjwnCwvEhZYgk', // Replace with your valid token
                 },
             })
             .then((response) => {
                 setModules([...modules, response.data]);
-                filterModules(searchTerm); // Re-filter after adding a new module
+                filterModules(searchTerm); 
             })
             .catch((error) => {
                 console.error('Error adding module:', error);
             });
     };
 
-    // Function to delete a module
     const deleteModule = (id) => {
         axios
             .delete(`http://localhost:8000/modules/${id}`, {
                 headers: {
-                    Authorization: 'Bearer YOUR_TOKEN_HERE', // Replace with your valid token
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmMxZjgyMzNiYmExNWNmMjRmMjBjZTEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNTE2MDYzNiwiZXhwIjoyNzI1MTYwNjM2fQ.ccGC8dGCZZJHjsbjA6CBTzOEfFk9iujjwnCwvEhZYgk', // Replace with your valid token
                 },
             })
             .then(() => {
                 setModules(modules.filter((module) => module.id !== id));
-                filterModules(searchTerm); // Re-filter after deleting a module
+                filterModules(searchTerm); 
             })
             .catch((error) => {
                 console.error('Error deleting module:', error);
@@ -142,12 +139,14 @@ const ModuleRecord = () => {
                     </div>
                     <div className="boxes-container">
                         {filteredModules.length > 0 ? (
-                            filteredModules.map(module => (
-                                <div className="boxes" key={module.id}>
-                                    <h2>{module.title}</h2>
+                            filteredModules.map((module, index) => (
+                                <div className="boxes" key={`${module.id}-${index}`}>
+                                    <h2>{module.name}</h2>
                                     <hr className="heading-line" />
-                                    <h4>Overview:</h4>
-                                    <p>Lecturer: {module.lecturer}</p>
+                                    <p><strong>Module Code:</strong> {module.module_code}</p>
+                                    <p><strong>Course ID:</strong> {module.course_id}</p>
+                                    <p><strong>Description:</strong> {module.description}</p>
+                                    <p><strong>Lecturer:</strong> {module.lecturer}</p>
                                     <button
                                         className="delete"
                                         onClick={() => deleteModule(module.id)}
