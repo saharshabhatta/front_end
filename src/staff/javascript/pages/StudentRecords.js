@@ -12,7 +12,7 @@ const StudentRecords = () => {
     axios
       .get('http://localhost:8000/students', {
         headers: {
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmMxZjgyMzNiYmExNWNmMjRmMjBjZTEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNDkxODE1NCwiZXhwIjoyNzI0OTE4MTU0fQ._xijVZPZK2vgB58T6IxCyeeF881WV6OO1LGdv3o2eGA', // Replace with your valid token
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmMxZjgyMzNiYmExNWNmMjRmMjBjZTEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNDk5NjMyMSwiZXhwIjoyNzI0OTk2MzIxfQ.EfEFPCK1eqLRkWOWbI7EPDsqbHq355jCgNPZbzaGqvk', // Replace with your valid token
         },
         params: {
           search: query,
@@ -34,9 +34,9 @@ const StudentRecords = () => {
   // Function to handle deleting a student
   const handleDeleteStudent = (studentId) => {
     axios
-      .delete(`http://localhost:8000/users/${studentId}`, {
+      .delete(`http://localhost:8000/students/${studentId}`, {
         headers: {
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmMxZjgyMzNiYmExNWNmMjRmMjBjZTEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNDkxODE1NCwiZXhwIjoyNzI0OTE4MTU0fQ._xijVZPZK2vgB58T6IxCyeeF881WV6OO1LGdv3o2eGA', // Replace with your valid token
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmMxZjgyMzNiYmExNWNmMjRmMjBjZTEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNDk5NjMyMSwiZXhwIjoyNzI0OTk2MzIxfQ.EfEFPCK1eqLRkWOWbI7EPDsqbHq355jCgNPZbzaGqvk', // Replace with your valid token
         },
       })
       .then(() => {
@@ -108,7 +108,7 @@ const StudentRecords = () => {
             </thead>
             <tbody>
               {students.map((student) => (
-                <tr key={student.id}>
+                <tr key={student.unid}>
                   <td>{student.unid}</td>
                   <td>{student.name}</td>
                   <td>{student.level}</td>
@@ -116,13 +116,12 @@ const StudentRecords = () => {
                   <td>{student.dob}</td>
                   <td>{student.gender}</td>
                   <td>
-                    <Link to={`./edit-student/${student.id}`} className="edit">
+                    <Link to={`./edit-student/${student.unid}`} className="edit">
                       <button className="edit">Edit</button>
                     </Link>
-                    <button className="archive">Archive</button>
                     <button
                       className="delete"
-                      onClick={() => handleDeleteStudent(student.id)}
+                      onClick={() => handleDeleteStudent(student.unid)}
                     >
                       Delete
                     </button>

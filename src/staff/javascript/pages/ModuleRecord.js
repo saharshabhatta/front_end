@@ -23,7 +23,7 @@ const ModuleRecord = () => {
             .then((response) => {
                 const data = response.data || [];
                 setModules(data);
-                filterModules(searchTerm); // Re-filter after fetching data
+                filterModules(searchTerm); 
             })
             .catch((error) => {
                 console.error('Error fetching modules:', error);

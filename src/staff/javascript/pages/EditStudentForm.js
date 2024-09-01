@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from '../layout/Sidebar';  
-import '../../css/Form.css';  
+import axios from 'axios';
+import { useParams, useHistory } from 'react-router-dom';
+import Sidebar from '../layout/Sidebar';
+import '../../css/Form.css'; // Ensure this path is correct
 
-const EditStudentForm = ({ studentData, onUpdate }) => {
+const EditStudentForm = () => {
+  const { id } = useParams(); // Extract id from URL params
+  const history = useHistory();
   const [student, setStudent] = useState({
     id: '',
     name: '',
@@ -12,30 +16,63 @@ const EditStudentForm = ({ studentData, onUpdate }) => {
     gender: '',
   });
 
+  // Fetch student data by ID when the component mounts or ID changes
   useEffect(() => {
-    if (studentData) {
-      setStudent(studentData);
+    if (id) {
+      axios
+        .get(`http://localhost:8000/students/${id}`, {
+          headers: {
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmMxZjgyMzNiYmExNWNmMjRmMjBjZTEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNDk5NjMyMSwiZXhwIjoyNzI0OTk2MzIxfQ.EfEFPCK1eqLRkWOWbI7EPDsqbHq355jCgNPZbzaGqvk', // Replace with your valid token
+          },
+        })
+        .then((response) => {
+          setStudent(response.data);
+        })
+        .catch((error) => {
+          console.error('Error fetching student data:', error);
+        });
     }
-  }, [studentData]);
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setStudent({ ...student, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onUpdate(student); 
+
+    // Prepare data for PATCH request
+    const studentPayload = {
+      name: student.name,
+      level: student.level,
+      course: student.course,
+      dob: student.dob,
+      gender: student.gender,
+    };
+
+    try {
+      await axios.patch(
+        `http://localhost:8000/students/${id}`, // Use ID in URL
+        studentPayload,
+        {
+          headers: {
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmMxZjgyMzNiYmExNWNmMjRmMjBjZTEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNDk5NjMyMSwiZXhwIjoyNzI0OTk2MzIxfQ.EfEFPCK1eqLRkWOWbI7EPDsqbHq355jCgNPZbzaGqvk', // Replace with your valid token
+          },
+        }
+      );
+      history.push('/staff/student-records'); // Redirect to student records after successful update
+    } catch (error) {
+      console.error('Error updating student data:', error);
+    }
   };
 
   return (
     <div className="container">
-      <Sidebar className="sidebar" />
+      <Sidebar />
       <div className="content">
         <nav className="nav">
-          <div style={{ padding: '10px 20px' }}>
-            WUC
-          </div>
+          WUC
         </nav>
         <div className="form-container">
           <h2>Edit Student Details</h2>

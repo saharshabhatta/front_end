@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import Sidebar from '../layout/Sidebar';  
-import '../../css/Form.css';  
+import Sidebar from '../layout/Sidebar';
+import '../../css/Form.css';
+import axios from 'axios';
 
 const AddStudentForm = () => {
   const [student, setStudent] = useState({
-    id: '',
-    name: '',
+    email: '',
+    password: '12345', // Predefined or input from a form field
+    unid: '',
     level: '',
-    course: '',
+    name: '',
+    course_id: '',
     dob: '',
     gender: '',
   });
@@ -17,18 +20,31 @@ const AddStudentForm = () => {
     setStudent({ ...student, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-   
-    console.log('Student added:', student);
-    setStudent({
-      id: '',
-      name: '',
-      level: '',
-      course: '',
-      dob: '',
-      gender: '',
-    });
+
+    try {
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmMxZjgyMzNiYmExNWNmMjRmMjBjZTEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNDk5NjMyMSwiZXhwIjoyNzI0OTk2MzIxfQ.EfEFPCK1eqLRkWOWbI7EPDsqbHq355jCgNPZbzaGqvk'; // Replace with a valid token
+      const response = await axios.post('http://localhost:8000/students', student, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json', // Ensure the content type is set
+        }
+      });
+      console.log('Student added:', response.data);
+      setStudent({
+        email: '',
+        password: '12345',
+        unid: '',
+        level: '',
+        name: '',
+        course_id: '',
+        dob: '',
+        gender: '',
+      });
+    } catch (error) {
+      console.error('Error adding student:', error.response ? error.response.data : error.message);
+    }
   };
 
   return (
@@ -44,12 +60,24 @@ const AddStudentForm = () => {
           <h2>Add New Student</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label className="label" htmlFor="id">UN ID</label>
+              <label className="label" htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={student.email}
+                onChange={handleChange}
+                className="input"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label className="label" htmlFor="unid">UN ID</label>
               <input
                 type="text"
-                id="id"
-                name="id"
-                value={student.id}
+                id="unid"
+                name="unid"
+                value={student.unid}
                 onChange={handleChange}
                 className="input"
                 required
@@ -80,12 +108,12 @@ const AddStudentForm = () => {
               />
             </div>
             <div className="form-group">
-              <label className="label" htmlFor="course">Course</label>
+              <label className="label" htmlFor="course_id">Course ID</label>
               <input
                 type="text"
-                id="course"
-                name="course"
-                value={student.course}
+                id="course_id"
+                name="course_id"
+                value={student.course_id}
                 onChange={handleChange}
                 className="input"
                 required
@@ -114,8 +142,8 @@ const AddStudentForm = () => {
                 required
               >
                 <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
               </select>
             </div>
             <button type="submit" className="submit-button">Add Student</button>

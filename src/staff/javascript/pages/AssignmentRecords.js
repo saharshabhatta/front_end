@@ -6,13 +6,14 @@ import Sidebar from '../layout/Sidebar';
 const AssignmentRecords = () => {
   const [assignments, setAssignments] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [error, setError] = useState(null); // To handle and display errors
 
-  // Function to fetch assignments from the server with an optional search query
+  // Fetch assignments from the server with an optional search query
   const fetchAssignments = (query = '') => {
     axios
-      .get('http://localhost:8000/assignments', {
+      .get('http://localhost:8000/modules', {
         headers: {
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmMxZjgyMzNiYmExNWNmMjRmMjBjZTEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNDkxODE1NCwiZXhwIjoyNzI0OTE4MTU0fQ._xijVZPZK2vgB58T6IxCyeeF881WV6OO1LGdv3o2eGA', // Replace with your valid token
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmMxZjgyMzNiYmExNWNmMjRmMjBjZTEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNTE1MjI1NSwiZXhwIjoyNzI1MTUyMjU1fQ.VOiJDApLCHH6TaFVCYuven1CdQJNPOeuo21xHsZEhQI', // Replace with your JWT token
         },
         params: {
           search: query,
@@ -20,9 +21,11 @@ const AssignmentRecords = () => {
       })
       .then((response) => {
         setAssignments(response.data);
+        setError(null); // Clear any previous errors
       })
       .catch((error) => {
         console.error('Error fetching assignments:', error);
+        setError('Failed to fetch assignments.'); // Set an error message
       });
   };
 
@@ -30,47 +33,6 @@ const AssignmentRecords = () => {
   useEffect(() => {
     fetchAssignments(searchQuery);
   }, [searchQuery]);
-
-  // Function to add a new assignment
-  const addAssignment = () => {
-    // Data to be added, should match the API requirements
-    const newAssignment = {
-      module_code: 'New Module Code',
-      assignment_brief: 'Brief description of the assignment',
-      assignment_deadline: new Date().toISOString(),
-      isArchived: false,
-      assignment_url: 'http://example.com/assignment-url',
-    };
-
-    axios
-      .post('http://localhost:8000/assignments', newAssignment, {
-        headers: {
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmMxZjgyMzNiYmExNWNmMjRmMjBjZTEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNDkxODE1NCwiZXhwIjoyNzI0OTE4MTU0fQ._xijVZPZK2vgB58T6IxCyeeF881WV6OO1LGdv3o2eGA', // Replace with your valid token
-        },
-      })
-      .then((response) => {
-        setAssignments([...assignments, response.data]);
-      })
-      .catch((error) => {
-        console.error('Error adding assignment:', error);
-      });
-  };
-
-  // Function to delete an assignment
-  const deleteAssignment = (id) => {
-    axios
-      .delete(`http://localhost:8000/assignments/${id}`, {
-        headers: {
-          Authorization: 'Bearer YOUR_TOKEN_HERE', // Replace with your valid token
-        },
-      })
-      .then(() => {
-        setAssignments(assignments.filter((assignment) => assignment.id !== id));
-      })
-      .catch((error) => {
-        console.error('Error deleting assignment:', error);
-      });
-  };
 
   // Function to handle search input change
   const handleSearchChange = (event) => {
@@ -82,6 +44,23 @@ const AssignmentRecords = () => {
     fetchAssignments(searchQuery);
   };
 
+  // Function to delete an assignment
+  const deleteAssignment = (id) => {
+    axios
+      .delete(`http://localhost:8000/modules/${id}`, {
+        headers: {
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NmMxZjgyMzNiYmExNWNmMjRmMjBjZTEiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyNTE1MjI1NSwiZXhwIjoyNzI1MTUyMjU1fQ.VOiJDApLCHH6TaFVCYuven1CdQJNPOeuo21xHsZEhQI', // Replace with your JWT token
+        },
+      })
+      .then(() => {
+        setAssignments(assignments.filter((assignment) => assignment.id !== id));
+      })
+      .catch((error) => {
+        console.error('Error deleting assignment:', error);
+        setError('Failed to delete assignment.'); // Set an error message
+      });
+  };
+
   return (
     <div className="app">
       <Sidebar />
@@ -91,6 +70,7 @@ const AssignmentRecords = () => {
         </nav>
         <div className="records">
           <h2>Assignment Records</h2>
+          {error && <div className="error-message">{error}</div>} {/* Display error message */}
           <div className="search-bar">
             <div>
               <input
@@ -124,10 +104,10 @@ const AssignmentRecords = () => {
               <tr>
                 <th>ID</th>
                 <th>Module Code</th>
-                <th>Assignment Brief</th>
-                <th>Assignment Deadline</th>
-                <th>Is Archived</th>
-                <th>Assignment URL</th>
+                <th>Assignment Title</th>
+                <th>Description</th>
+                <th>Due Date</th>
+                <th>File</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -136,13 +116,17 @@ const AssignmentRecords = () => {
                 <tr key={assignment.id}>
                   <td>{assignment.id}</td>
                   <td>{assignment.module_code}</td>
-                  <td>{assignment.assignment_brief}</td>
-                  <td>{new Date(assignment.assignment_deadline).toLocaleDateString()}</td>
-                  <td>{assignment.isArchived ? 'Yes' : 'No'}</td>
+                  <td>{assignment.assignmentTitle}</td>
+                  <td>{assignment.description}</td>
+                  <td>{new Date(assignment.dueDate).toLocaleDateString()}</td>
                   <td>
-                    <a href={assignment.assignment_url} target="_blank" rel="noopener noreferrer">
-                      View Assignment
-                    </a>
+                    {assignment.file ? (
+                      <a href={assignment.file} target="_blank" rel="noopener noreferrer">
+                        View File
+                      </a>
+                    ) : (
+                      'No file'
+                    )}
                   </td>
                   <td>
                     <Link to={`./edit-assignment/${assignment.id}`} className="edit">

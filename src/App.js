@@ -65,12 +65,12 @@ function App() {
         <Route path="/staff/archive-records" exact component={ArchiveRecords} />
         <Route path="/staff/assignment-records" exact component={AssignmentRecords} />
         <Route path="/staff/course-record" exact component={CourseRecord} />
-        <Route path="/staff/edit-assignment" exact component={EditAssignmentForm} />
-        <Route path="/staff/edit-course" exact component={EditCourseForm} />
-        <Route path="/staff/edit-module" exact component={EditModuleForm} />
-        <Route path="/staff/edit-result" exact component={EditResultForm} />
-        <Route path="/staff/edit-staff" exact component={EditStaffForm} />
-        <Route path="/staff/edit-student" exact component={EditStudentForm} />
+        <Route path="/staff/edit-assignment/:id" exact component={EditAssignmentForm} />
+        <Route path="/staff/edit-course/:id" exact component={EditCourseForm} />
+        <Route path="/staff/edit-module/:id" exact component={EditModuleForm} />
+        <Route path="/staff/edit-result/:id" exact component={EditResultForm} />
+        <Route path="/staff/edit-staff/:id" exact component={EditStaffForm} />
+        <Route path="/staff/edit-student/:id" exact component={EditStudentForm} />
         <Route path="/staff/module-record" exact component={ModuleRecord} />
         <Route path="/staff/results" exact component={ModuleResults} />
         <Route path="/staff/staff-records" exact component={StaffRecord} />
